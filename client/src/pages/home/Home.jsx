@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import UsersList from '../../components/users-list/UsersList';
 import socket from '../../sockets/socket';
-import { StyledMessagesContainer } from './styles';
+import { StyledChat, StyledMessagesContainer } from './styles';
 
 const Home = () => {
 	const [messages, setMessages] = useState([]);
@@ -14,12 +15,15 @@ const Home = () => {
 
 	return (
 		<>
-			<StyledMessagesContainer>
-				{messages.length === 0 && <p>No messages</p>}
-				{messages.map(item => (
-					<p key={item.id}>{item.message}</p>
-				))}
-			</StyledMessagesContainer>
+			<StyledChat>
+				<UsersList />
+				<StyledMessagesContainer>
+					{messages.length === 0 && <p>No messages</p>}
+					{messages.map(item => (
+						<p key={item.id}>{item.message}</p>
+					))}
+				</StyledMessagesContainer>
+			</StyledChat>
 			<form onSubmit={e => handleSubmitMessage(e, socket)}>
 				<input name='message' type='text' />
 				<input type='submit' />
