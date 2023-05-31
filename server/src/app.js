@@ -11,7 +11,11 @@ const io = new Server(server, {
   cors: {
     origin: '*', // O cambia '*' por la URL de tu aplicación de React
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'] // Corrige el nombre del encabezado
+    allowedHeaders: ['Content-Type', 'Authorization'], // Corrige el nombre del encabezado
+    credentials: true, // Permite el envío de cookies y encabezados de autenticación en las solicitudes CORS
+    preflightContinue: false, // Deshabilita la respuesta 204 No Content en las solicitudes OPTIONS de preflight
+    optionsSuccessStatus: 200, // Establece el código de estado de éxito para las solicitudes OPTIONS de preflight
+    maxAge: 3600 // Especifica la cantidad de segundos que se deben almacenar en caché las opciones de CORS
   }
 });
 
