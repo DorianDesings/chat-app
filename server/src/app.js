@@ -9,7 +9,7 @@ const {
 const server = require('http').Server(app);
 const io = new Server(server, {
   cors: {
-    origin: '*', // O cambia '*' por la URL de tu aplicación de React
+    origin: 'https://client-chat-mufc.onrender.com',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Corrige el nombre del encabezado
     credentials: true, // Permite el envío de cookies y encabezados de autenticación en las solicitudes CORS
