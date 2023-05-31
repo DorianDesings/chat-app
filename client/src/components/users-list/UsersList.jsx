@@ -1,12 +1,16 @@
-import { StyledList, StyledListItem } from './styles';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/Auth.context';
+import { StyledList } from './styles';
 
 const UsersList = () => {
+	const { allUsers } = useContext(AuthContext);
+
 	return (
 		<>
 			<StyledList>
-				<StyledListItem>User 1</StyledListItem>
-				<StyledListItem>User 2</StyledListItem>
-				<StyledListItem>User 3</StyledListItem>
+				{allUsers.map(user => (
+					<p key={user.socketId}>{user.username}</p>
+				))}
 			</StyledList>
 		</>
 	);

@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { v4 } = require('uuid');
+
 const { Server } = require('socket.io');
+const {
+  establishSocketConnection
+} = require('../socket-controller/socket-controller');
 const server = require('http').Server(app);
 const io = new Server(server, {
   cors: {
@@ -12,22 +15,12 @@ const io = new Server(server, {
   }
 });
 
+// Importa el módulo socketController
+
+// Lógica de tu servidor de sockets
 io.on('connection', socket => {
-  console.log('Cliente conectado');
-
-  // Maneja la solicitud de cambio de colección
-  socket.on('client-message', data => {
-    const newMessage = {
-      id: v4(),
-      message: data.message
-    };
-    io.emit('server-message', newMessage);
-  });
-
-  // Maneja la desconexión del cliente
-  socket.on('disconnect', () => {
-    console.log('Cliente desconectado');
-  });
+  // Pasa el objeto socket y io a la función establishSocketConnection
+  establishSocketConnection(socket, io);
 });
 
 // Rutas
